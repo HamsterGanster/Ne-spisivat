@@ -1,5 +1,5 @@
-module HW9 (stackMachine) where
-import Utils
+module {-смотри девятую презентацию-} where
+import {-смотри девятую презентацию-}
 
 newtype Stack = Stack [Int]
     deriving Show
@@ -15,13 +15,7 @@ pop (Stack []) = (0, Stack [])
 pop (Stack (x:arr)) = (x, Stack arr)
 
 
-data Instruction = Push Int 
-                 | Add 
-                 | Sub 
-                 | Div 
-                 | Mul 
-                 | Pow 
-                 deriving Show
+data Instruction = {-смотри девятую презентацию-}
 
 computeInstructions :: [Instruction] -> Int
 computeInstructions [] = 0
