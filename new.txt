@@ -1,0 +1,113 @@
+Словарь:
+rn — какой-то регистр
+offset — смещение
+PC — адрес в памяти, команда которая будет выполняться
+SP — адрес памяти, откуда pop
+<const> — какая-то метка (label), например, mult
+
+СТЕК РАБОТАЕТ С КОНЦА, сначала значение кладётся в ячейку 0xFF, затем — в 0xFE, после — 0xFD  и так далее
+
+push rn — аналог на си: SP--; *SP = rn
+pop rn  — аналог на си: rn = *SP; SP++
+
+
+asect <число от 0 до 255> — "говорит" компилятору, с какого адреса начать вставлять код программы. Например, при asect 0x00 компилятор будет вставлять код с начала
+
+rsect <const> — как я понял, объявляет начало подпрограммы в отдельном файле
+# пример:
+_в отдельном файле_:
+rsect mul
+mul>  # именно "mul>" а не "mul:" так как это для rsect
+	push r2 # save r2
+	ldi r2, 0 # clr r2
+	
+	inc r1 # иначе 1 итерации не хватает
+	while 
+		dec r1
+	stays ne
+		add r0, r2
+	wend
+	move r2, r0 # result will in r0 (r0 = r2)
+	pop r2 # restore r2
+	
+	rts # go back	
+# конец отдельного файла
+# _в главном файле_ считаем -3x+7
+asect 0
+mul: ext  # объявляем метку внешней (declare mul as an external label)
+ldi r0, x # \
+ld r0, r0 # / r0 = x
+ldi r1, -3 # r1 = -3
+jsr mul # goto mul, r0 = r0 * r1,  r0 = -3x
+ldi r1, 7 # r1 = 7
+add r1, r0 # r0 += r1,  r0 = -3x+7
+halt
+x: dc <число>
+end 
+# конец главного файла
+
+
+tplate <name> — Я НЕ ПОНЯЛб но об этом есть в лекции 5. некий malloc, писать обязательно до asect <число>
+
+addsp n — SP += n
+ldsa rn, offset — rn = SP+offset
+ldsp rn — rn = SP
+stsp rn — не очень разобрался, что-то очень странное
+# пример:
+                    stsp r0 — аналог на си: *SP = r1
+stsp r1 / stsp r2 / stsp r3 — аналог на си: *SP = r0
+
+jsr <const> — что-то похожее на goto, также кладёт в стек куда вернуться
+# что делается при вызове jsr: SP = SP-1, *SP = PC, PC = <const>
+rts — без аргументов
+# действия при вызове: PC = *SP; SP++
+# или коротко: PC = pop(stack)
+jsrr rn — аналог jsr, но вместо <const> какой-то регистр
+
+
+# Пример кода: 
+# main
+ldi r0, 5
+ldi r1, 4
+jsr mult # "goto mult"
+# после этого r0 = r0*r1
+
+mult:
+	push r2 # save r2
+	ldi r2, 0 # clr r2
+	
+	inc r1 # иначе 1 итерации не хватает
+	while 
+		dec r1
+	stays ne
+		add r0, r2
+	wend
+	move r2, r0 # result will in r0 (r0 = r2)
+	pop r2 # restore r2
+	
+	rts # go back, продолжить выполнять команды после jsr mult
+# конец примера
+
+
+
+
+if, while, do-until
+фото с условиями для is, stays и until: https://disk.yandex.ru/i/4W4sBW3ArUntVw
+
+структура:
+if
+	подготовительные действия, примеры: tst rn / cmp ri, rj (по факту sub ri, rj но rj не перезапишется)
+is <условие>
+	# do smth
+fi # закрыть if
+
+while
+	подготовительные действия, примеры: tst rn / cmp ri, rj (по факту sub ri, rj но rj не перезапишется)
+stays <условие> # тот же is, но для while
+	# do smth
+wend # закрыть while
+
+
+do
+# do smth
+until <условие> # условие такие же как для is и stays
