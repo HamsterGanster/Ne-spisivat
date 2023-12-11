@@ -4,6 +4,25 @@ offset — смещение
 PC — адрес в памяти, команда которая будет выполняться
 SP — адрес памяти, откуда pop
 <const> — какая-то метка (label), например, mult
+! — not (отрицание переменной)
+
+Условия для is / stays / until:
+condition	flag			interpretation
+eq/z		Z			equal, equal zero (rj == ri / rn == 0)
+ne/nz		!Z			not equal, not zero (ri != rj, rn != 0)
+hs/cs		C			unsigned higher or same (беззнаковое >=, )
+lo/cc		!C			unsigned lower (беззнаковое <, например, 17 < 193 выполниться блок is)
+hi		(C & !Z)		unsigned higher (беззнаковое >)
+ls		(!C & Z)		unsigned lower or same (беззнаковое <=)
+mi		N			negative (если число < 0, число <- [-128;-1])
+pl		!N			positive or zero (если число >= 0, число <- [0; 127])
+vs		V			oVerflow is set (если при сложении двух положительных чисел получилось отрицательное, или наоборот — сложили два - числа и получили +)
+vc		!V			oVerflow is clear (слоижили отрицательные числа получили отрицательное, или сложили 2 + числа и получилось положительное)
+ge		(N & V) or (!N & !V)	greater than or equal (знаковое >=)
+lt 		(N & !V) or (!N & V)	less than (знаковое <)
+gt		(N & V) or (!N & !V)	greater than (знаковое >)
+le		Z or (N & !V)or(!N & V)	less than or equal (знаковое <=)
+
 
 СТЕК РАБОТАЕТ С КОНЦА, сначала значение кладётся в ячейку 0xFF, затем — в 0xFE, после — 0xFD  и так далее
 
@@ -92,7 +111,7 @@ mult:
 
 
 if, while, do-until
-фото с условиями для is, stays и until: https://disk.yandex.ru/i/4W4sBW3ArUntVw
+фото с условиями для is, stays и until (либо список в начале файла): https://disk.yandex.ru/i/4W4sBW3ArUntVw
 
 структура:
 if
