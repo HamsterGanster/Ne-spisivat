@@ -13,7 +13,7 @@ ne/nz		!Z				not equal, not zero (ri != rj, rn != 0)
 hs/cs		C				unsigned higher or same (беззнаковое >=, )
 lo/cc		!C				unsigned lower (беззнаковое <, например, 17 < 193 выполниться блок is)
 hi		(C & !Z)			unsigned higher (беззнаковое >)
-ls		(!C & Z)			unsigned lower or same (беззнаковое <=)
+ls		(!C or Z)			unsigned lower or same (беззнаковое <=)
 mi		N				negative (если число < 0, число <- [-128;-1])
 pl		!N				positive or zero (если число >= 0, число <- [0; 127])
 vs		V				oVerflow is set (если при сложении двух положительных чисел получилось отрицательное, или наоборот — сложили два - числа и получили +)
@@ -21,7 +21,7 @@ vc		!V				oVerflow is clear (слоижили отрицательные чис�
 ge		(N & V) or (!N & !V)		greater than or equal (знаковое >=)
 lt 		(N & !V) or (!N & V)		less than (знаковое <)
 gt		(!Z & N & V) or (!Z & !N & !V)	greater than (знаковое >)
-le		Z or (N & !V)or(!N & V)		less than or equal (знаковое <=)
+le		(Z or N & !V) or (!N & V)	less than or equal (знаковое <=)
 
 CONTINUE BREAK работают также как в си:
 continue 
