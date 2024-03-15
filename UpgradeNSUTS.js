@@ -13,9 +13,9 @@
 let how_often = 100; // in ms, milliseconds
 
 // light in rating
-let yourName = 'Мартынов from baguette boys';
-let yourColor= '#A5ECFE';
-let yourDelay= 250;
+let yourName = 'Мартынов from baguette boys'; // точное имя из рейтинга
+let yourColor= '#A5ECFE'; // BackGroundColor 
+let yourDelay= 250; // Задержка перед подсветкой в миллисекундах. Если подсветки нет, увеличить время
 
 
 
