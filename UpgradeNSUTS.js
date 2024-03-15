@@ -9,9 +9,17 @@
 
 // Вставляете этот код в поле для JS, Ctrl+S (сохранить):
 
-let how_often = 100; // время в мс, как часто обновлять текст
+// how often need update ASSEPTED and other fun text
+let how_often = 100; // in ms, milliseconds
 
-// функция чисто из Интернета
+// light in rating
+let yourName = 'Мартынов from baguette boys';
+let yourColor= '#A5ECFE';
+let yourDelay= 250;
+
+
+
+// function for searching text in HTML
 HTMLElement.prototype.getNodesByText = function (text) {
   const expr = `.//*[text()[contains(
     translate(.,
@@ -29,21 +37,38 @@ HTMLElement.prototype.getNodesByText = function (text) {
 };
 
 
-// тут уже сам))
-setInterval(function () { 
-	document.body.getNodesByText('YOUR TEXT').forEach(
+// function that light your name in rating 
+setTimeout(function() {
+	document.body.getNodesByText(yourName).forEach(
 		el => {
-			// просто заменить текст. Может выйти: "<b> text </b>"
-			el.textContent = 'NEW TEXT';
-			
-			// если хочешь не просто текст, а изменить html.
-			// Может выйт: text, но жирным шрифтом
-			el.innerHTML   = 'NEW TEXT'.bold(); 
-			
 			// You can insert more parameters, for example:
-			//el.style.backgroundColor = '#7f7';
+			el.parentNode.style.backgroundColor = '#A5ECFE';
+			
+			el.parentNode.parentNode.getElementsByTagName('span')[0].style.backgroundColor = '#44444400'; // RRGGBBAA — Red Green Blue Alpha
 		}
 	);
+}, yourDelay); 
+
+
+// function that replace text to fun
+setInterval(function () { 
+	// document.body.getNodesByText('YOUR TEXT').forEach(
+	// 	el => {
+	// 		// просто заменить текст. Можно: "<b> text </b>", но на html это не повлияет и выведет <b> как 3 символа
+	// 		el.textContent = 'NEW TEXT';
+			
+	// 		// если хочешь не просто текст, а изменить html.
+	// 		// Может выйт: text, но жирным шрифтом
+	// 		el.innerHTML   = 'NEW TEXT'.bold(); 
+			
+	// 		// You can insert more parameters, for example:
+	// 		//el.style.backgroundColor = '#7f7';
+			
+	// 		// You can get parentNode
+	// 		//el.parentNode.style.backgroundColor = '#7f7';
+	// 	}
+	// );
+	
 	
 	// document.body.getNodesByText('🐝 Testing...').forEach(
  //       el => {
