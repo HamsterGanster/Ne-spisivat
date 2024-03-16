@@ -39,7 +39,7 @@ HTMLElement.prototype.getNodesByText = function (text) {
 
 
 // function that light your name in rating 
-setTimeout(function() {
+setInterval(function() {
 	document.body.getNodesByText(yourName).forEach(
 		el => {
 			// You can insert more parameters, for example:
