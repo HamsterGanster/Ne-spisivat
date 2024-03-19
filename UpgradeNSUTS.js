@@ -40,6 +40,20 @@ HTMLElement.prototype.getNodesByText = function (text) {
 
 // function that light your name in rating 
 setInterval(function() {
+	document.body.getNodesByText('В туре включено ограничение на количество отправленных решений по задачам.').forEach(
+		el => {
+			// You can insert more parameters, for example:
+			el.parentNode.removeChild(el);
+		}
+	);
+}, yourDelay); 
+
+
+
+
+
+// function that light your name in rating 
+setInterval(function() {
 	document.body.getNodesByText(yourName).forEach(
 		el => {
 			// You can insert more parameters, for example:
@@ -50,6 +64,7 @@ setInterval(function() {
 	);
 }, yourDelay); 
 
+-
 
 // function that replace text to fun
 setInterval(function () { 
