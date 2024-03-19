@@ -18,6 +18,25 @@ let yourName = 'Мартынов from baguette boys'; // точное имя и�
 let yourColor= '#A5ECFE'; // BackGroundColor 
 let yourDelay= 250; // Задержка перед подсветкой в миллисекундах. Если подсветки нет, увеличить время
 
+// your replace text:
+testing 		= '🐝 Так, ну, подождите...';
+accepted 		= '🏆 ASSEPTED';
+compileError 		= '🚧 Compile Error'; // обычное
+deadlock 		= '🥶 Deadlock - Timeout'; // обычное
+judgementFailed 	= '🤢 Judgement Failed'; // обычное
+juryError 		= '🤮 Jury Error'; // обычное
+compiled 		= '👍 Compiled (и че? 😐)';
+memoryLimit 		= '🤯 Отдай память!';
+noOutputFile	 	= '🔍 Файл на выход?';
+presentationError 	= '🚽 Ошибка в презентации';
+runTimeError 		= '🔥 Алло, пожарные?';
+securityViolation 	= '💀 Security Violation'; // обычное
+timeLimit 		= '⌛️ Не тормози - сникерсни';
+wrongAnswer 		= '                  🗿 Bruh                    '.bold();
+staticAnalysisFailed 	= '✨ Static Analysis Failed'; // обычное
+dynamicAnalysisFailed 	= '🔧 Dynamic Analysis Failed'; // обычное
+skipped 		= '👀 Skipped'; // обычное
+
 
 
 // function for searching text in HTML
@@ -88,7 +107,7 @@ setInterval(function () {
 	
 	// document.body.getNodesByText('🐝 Testing...').forEach(
  //       el => {
- //           el.textContent = '🐝 Так, ну, подождите...';
+ //           el.textContent = Testing;
  //       }
  //   );
 	
@@ -102,73 +121,73 @@ setInterval(function () {
 
     document.body.getNodesByText('🚧 Compile Error').forEach(
         el => {
-            el.textContent = '🚧 Compile Error';
+            el.textContent = compileError;
         }
     );
 
     document.body.getNodesByText('🥶 Deadlock - Timeout').forEach(
         el => {
-            el.textContent = '🥶 Deadlock - Timeout';
+            el.textContent = deadlock;
         }
     );
 
     document.body.getNodesByText('🤢 Judgement Failed').forEach(
         el => {
-            el.textContent = '🤢 Judgement Failed';
+            el.textContent = judgementFailed;
         }
     );
 
     document.body.getNodesByText('🤮 Jury Error').forEach(
         el => {
-            el.textContent = '🤮 Jury Error';
+            el.textContent = juryError;
         }
     );
 
     document.body.getNodesByText('👍 Compiled').forEach(
         el => {
-            el.textContent = '👍 Compiled (и че? 😐)';
+            el.textContent = compiled;
         }
     );
 
     document.body.getNodesByText('🤯 Memory Limit Exceeded').forEach(
         el => {
-            el.textContent = '🤯 Отдай память!';
+            el.textContent = memoryLimit;
         }
     );
 
     document.body.getNodesByText('🔍 No Output File').forEach(
         el => {
-            el.textContent = '🔍 Файл на выход?';
+            el.textContent = noOutputFile;
         }
     );
 
     document.body.getNodesByText('🚽 Presentation Error').forEach(
         el => {
-            el.textContent = '🚽 Ошибка в презентации';
+            el.textContent = presentationError;
         }
     );
 
     document.body.getNodesByText('🔥 Run-Time Error').forEach(
         el => {
-            el.textContent = '🔥 Алло, пожарные?';
+            el.textContent = runTimeError;
         }
     );
 
     document.body.getNodesByText('💀 Security Violation').forEach(
         el => {
-            el.textContent = '💀 Security Violation';
+            el.textContent = securityViolation;
         }
     );
 
     document.body.getNodesByText('⌛ Time Limit Exceeded').forEach(
         el => {
-            el.textContent = '⌛️ Не тормози - сникерсни';
+            el.textContent = timeLimit;
         }
     );
 
     document.body.getNodesByText('🗿 Wrong Answer').forEach(
         el => {
-            el.innerHTML = '                  🗿 Bruh                    '.bold();
+            el.innerHTML = wrongAnswer;
             el.style.backgroundColor = '#f0f3';
             el.style.color = '#f00f'; // red
             el.style.width = 75;
@@ -177,19 +196,19 @@ setInterval(function () {
 
     document.body.getNodesByText('✨ Static Analysis Failed').forEach(
         el => {
-            el.textContent = '✨ Static Analysis Failed';
+            el.textContent = staticAnalysisFailed
         }
     );
 
     document.body.getNodesByText('🔧 Dynamic Analysis Failed').forEach(
         el => {
-            el.textContent = '🔧 Dynamic Analysis Failed';
+            el.textContent = dynamicAnalysisFailed;
         }
     );
 
     document.body.getNodesByText('👀 Skipped').forEach(
         el => {
-            el.textContent = '👀 Skipped';
+            el.textContent = skipped;
         }
     );
 
