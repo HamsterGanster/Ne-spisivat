@@ -15,24 +15,18 @@ let how_often = 100; // in ms, milliseconds
 
 // light in ranking
 let yourColor = '#A5ECFE'; // BackGroundColor — color in ranking
-// Dealy before "lighting in ranking"/"deleting a table with attempts" milliseconds.
+
+// Delay before "lighting in ranking"/"deleting a table with attempts" milliseconds.
 // If there is no lighting, try to increase the time
 let yourDelay = 200; 
 
-let yourTop = 0;
+let yourTop = 0; // your place in ranking
 
 let yourName = 'Мартынов from t.me/baguette_boys'; // точное имя из рейтинга
 let autoSearch = 1; // автопоиск имени на странице
 let getNameDelay = 500; // задержка в мс перед автоматическим поиском имени
 
-window.onload = function () {  
-	if (autoSearch == 1)
-    setTimeout(function() {}, 10);(function() {
-      // There is only 1 block with the "dropdown" class on the site
-      // And it has your name
-      yourName = document.getElementsByClassName('dropdown')[0].childNodes[0].textContent;
-    }, getNameDelay); 
-  }
+let doButtonsBigger = 1;
 
 // your replace text:
 testing               = '🐝 Так, ну, подождите...';
@@ -55,7 +49,9 @@ skipped         = '👀 Skipped'; // обычное
 
 
 
-// function from Internet for searching text in HTML
+
+
+// function-helper from Internet for searching text in HTML
 HTMLElement.prototype.getNodesByText = function (text) {
   const expr = `.//*[text()[contains(
     translate(.,
@@ -73,19 +69,47 @@ HTMLElement.prototype.getNodesByText = function (text) {
 };
 
 
-// function that light your name in ranking 
+// do this when the site is loaded
+window.onload = function () {  
+	// get yourName if autoSearch enabled
+	if (autoSearch == 1)
+    setTimeout(function() {
+      // There is only 1 block with the "dropdown" class on the site
+      // And it has your name
+      yourName = document.getElementsByClassName('dropdown')[0].childNodes[0].textContent;
+    }, getNameDelay); 
+    
+    
+    // защита от дурака
+    // delete button "Печать" because it's unuseful
+    setTimeout(function () {
+    	// 0 because there is only 1 'ul' block
+    	// 5 because "Печать" шестая по счёту, но индексы с нуля
+    	let deleteThis = document.getElementsByTagName('ul')[0].childNodes[5];
+    	deleteThis.parentNode.removeChild(deleteThis);
+    }, yourDelay);
+    
+    
+    // set fontSize = 30px for "выбрать компилятор", "выбрать задачу" and "выбрать файл" (very hard to click)
+    if (doButtonsBigger == 1)
+	{
+		setTimeout(function () {
+	 		document.getElementsByName('lang')[0].setAttribute('style', 'font-size: 30px');
+	 		document.getElementsByName('task')[0].setAttribute('style', 'font-size: 30px');
+	 		document.getElementsByName('file')[0].setAttribute('style', 'font-size: 30px');
+		}, yourDelay);
+	}
+}
+
+// delete table with attempts
 setInterval(function() {
-	document.body.getNodesByText('В туре включено ограничение на количество отправленных решений по задачам.').forEach(
+    document.body.getNodesByText('В туре включено ограничение на количество отправленных решений по задачам.').forEach(
 		el => {
 			// You can insert more parameters, for example:
 			el.parentNode.removeChild(el);
 		}
 	);
-}, yourDelay); 
-
-
-
-
+}, yourDelay);
 
 // function that light your name in ranking 
 setInterval(function() {
