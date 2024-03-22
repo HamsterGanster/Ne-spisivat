@@ -94,9 +94,12 @@ window.onload = function () {
     if (doButtonsBigger == 1)
 	{
 		setTimeout(function () {
-	 		document.getElementsByName('lang')[0].setAttribute('style', 'font-size: 30px');
-	 		document.getElementsByName('task')[0].setAttribute('style', 'font-size: 30px');
-	 		document.getElementsByName('file')[0].setAttribute('style', 'font-size: 30px');
+			if (document.getElementsByName('lang').length > 0)
+			{
+	 			document.getElementsByName('lang')[0].setAttribute('style', 'font-size: 30px');
+	 			document.getElementsByName('task')[0].setAttribute('style', 'font-size: 30px');
+	 			document.getElementsByName('file')[0].setAttribute('style', 'font-size: 30px');
+			}
 		}, yourDelay);
 	}
 }
