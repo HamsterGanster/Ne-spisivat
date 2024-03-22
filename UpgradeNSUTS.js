@@ -77,7 +77,19 @@ window.onload = function () {
       // There is only 1 block with the "dropdown" class on the site
       // And it has your name
       yourName = document.getElementsByClassName('dropdown')[0].childNodes[0].textContent;
-    }, getNameDelay); 
+    }, getNameDelay);
+    
+    setTimeout(function () {
+    	var adv = document.createElement("DIV");
+		adv.innerHTML = "Updated by Мартынов from t.me/baguette_boys".italics().bold();
+        // adv.style.backgroundColor = '#e3ff00';
+        // adv.style.textAlign = 'center';
+            
+    	let el = document.getElementsByClassName('title')[0];
+    	el.appendChild(adv);
+    	el.parentNode.setAttribute("style","height:100px");
+    	// el.style.height = '500px';
+    }, yourDelay);
     
     
     // защита от дурака
