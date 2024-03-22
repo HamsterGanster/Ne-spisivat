@@ -17,7 +17,7 @@ let how_often = 100; // in ms, milliseconds
 let yourColor = '#A5ECFE'; // BackGroundColor — color in ranking
 // Dealy before "lighting in ranking"/"deleting a table with attempts" milliseconds.
 // If there is no lighting, try to increase the time
-let yourDelay = 500; 
+let yourDelay = 200; 
 
 let yourTop = 0;
 
