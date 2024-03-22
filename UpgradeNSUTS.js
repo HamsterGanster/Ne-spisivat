@@ -13,29 +13,45 @@
 // how often need update ASSEPTED and other fun text
 let how_often = 100; // in ms, milliseconds
 
-// light in rating
+// light in ranking
+let yourColor = '#A5ECFE'; // BackGroundColor — color in ranking
+// Dealy before "lighting in ranking"/"deleting a table with attempts" milliseconds.
+// If there is no lighting, try to increase the time
+let yourDelay = 500; 
+
+let yourTop = 0;
+
 let yourName = 'Мартынов from t.me/baguette_boys'; // точное имя из рейтинга
-let yourColor= '#A5ECFE'; // BackGroundColor 
-let yourDelay= 250; // Задержка перед подсветкой/убиранием таблицы попыток в миллисекундах. Если подсветки нет, увеличить время
+let autoSearch = 1; // автопоиск имени на странице
+let getNameDelay = 500; // задержка в мс перед автоматическим поиском имени
+
+window.onload = function () {  
+	if (autoSearch == 1)
+    setTimeout(function() {}, 10);(function() {
+      // There is only 1 block with the "dropdown" class on the site
+      // And it has your name
+      yourName = document.getElementsByClassName('dropdown')[0].childNodes[0].textContent;
+    }, getNameDelay); 
+  }
 
 // your replace text:
-testing 		= '🐝 Так, ну, подождите...';
-accepted 		= '🏆 ASSEPTED';
-compileError 		= '🚧 Compile Error'; // обычное
-deadlock 		= '🥶 Deadlock - Timeout'; // обычное
-judgementFailed 	= '🤢 Judgement Failed'; // обычное
-juryError 		= '🤮 Jury Error'; // обычное
-compiled 		= '👍 Compiled (и че? 😐)';
-memoryLimit 		= '🤯 Отдай память!';
-noOutputFile	 	= '🔍 Файл на выход?';
-presentationError 	= '🚽 Ошибка в презентации';
-runTimeError 		= '🔥 Алло, пожарные?';
-securityViolation 	= '💀 Security Violation'; // обычное
-timeLimit 		= '⌛️ Не тормози - сникерсни';
-wrongAnswer 		= '                  🗿 Bruh                    '.bold();
-staticAnalysisFailed 	= '✨ Static Analysis Failed'; // обычное
-dynamicAnalysisFailed 	= '🔧 Dynamic Analysis Failed'; // обычное
-skipped 		= '👀 Skipped'; // обычное
+testing         = '🐝 Так, ну, подождите...';
+accepted        = '🏆 ASSEPTED';
+compileError    = '🚧 Compile Error'; // обычное
+deadlock        = '🥶 Deadlock - Timeout'; // обычное
+judgementFailed = '🤢 Judgement Failed'; // обычное
+juryError       = '🤮 Jury Error'; // обычное
+compiled        = '👍 Compiled (и че? 😐)';
+memoryLimit     = '🤯 Отдай память!';
+noOutputFile    = '🔍 Файл на выход?';
+presentationError='🚽 Ошибка в презентации';
+runTimeError    = '🔥 Алло, пожарные?';
+securityViolation='💀 Security Violation'; // обычное
+timeLimit       = '⌛️ Не тормози - сникерсни';
+wrongAnswer     = '                  🗿 Bruh                    '.bold();
+staticAnalysisFailed ='✨ Static Analysis Failed'; // обычное
+dynamicAnalysisFailed='🔧 Dynamic Analysis Failed'; // обычное
+skipped         = '👀 Skipped'; // обычное
 
 
 
@@ -57,7 +73,7 @@ HTMLElement.prototype.getNodesByText = function (text) {
 };
 
 
-// function that light your name in rating 
+// function that light your name in ranking 
 setInterval(function() {
 	document.body.getNodesByText('В туре включено ограничение на количество отправленных решений по задачам.').forEach(
 		el => {
@@ -71,19 +87,29 @@ setInterval(function() {
 
 
 
-// function that light your name in rating 
+// function that light your name in ranking 
 setInterval(function() {
 	document.body.getNodesByText(yourName).forEach(
 		el => {
-			// You can insert more parameters, for example:
-			el.parentNode.style.backgroundColor = '#A5ECFE';
+			// el — очередной HTML blocks with yourName (forEach перебирает все)
+			// .parent — родительский блок
+			// .getEl...TagName — возвращает из родителей только <td> блоки
+			var htmlCollection = el.parentNode.getElementsByTagName('td');
 			
-			el.parentNode.parentNode.getElementsByTagName('span')[0].style.backgroundColor = '#44444400'; // RRGGBBAA — Red Green Blue Alpha
-		}
-	);
-}, yourDelay); 
+			// if <td> number greater then 0 htmlColl have line with yourName from ranking
+			if (htmlCollection.length > 0) { 
+				// get your place in ranking:
+				yourTop = htmlCollection[0].textContent; 
+				
+				// coloring the line:
+				el.parentNode.parentNode.getElementsByTagName('tr')[yourTop-1].style.backgroundColor = yourColor;
+			} // end if
+			
+		}   // end el
+	);    // end ForEach
+}, yourDelay); // end setInterval
 
--
+
 
 // function that replace text to fun
 setInterval(function () { 
@@ -117,73 +143,73 @@ setInterval(function () {
             el.style.backgroundColor = '#0f02';
             el.style.textAlign = 'center';
         }
-    );
+    ); // end replace ACCEPTED
 
     document.body.getNodesByText('🚧 Compile Error').forEach(
         el => {
             el.textContent = compileError;
         }
-    );
+    ); // end replace Compile Error
 
     document.body.getNodesByText('🥶 Deadlock - Timeout').forEach(
         el => {
             el.textContent = deadlock;
         }
-    );
+    ); // end replace DeadLock
 
     document.body.getNodesByText('🤢 Judgement Failed').forEach(
         el => {
             el.textContent = judgementFailed;
         }
-    );
+    ); // end replace JudgementFailed
 
     document.body.getNodesByText('🤮 Jury Error').forEach(
         el => {
             el.textContent = juryError;
         }
-    );
+    ); // end replace JuryError
 
     document.body.getNodesByText('👍 Compiled').forEach(
         el => {
             el.textContent = compiled;
         }
-    );
+    ); // end replace Compiled
 
     document.body.getNodesByText('🤯 Memory Limit Exceeded').forEach(
         el => {
             el.textContent = memoryLimit;
         }
-    );
+    ); // end replace MemoryLimit
 
     document.body.getNodesByText('🔍 No Output File').forEach(
         el => {
             el.textContent = noOutputFile;
         }
-    );
+    ); // end replace NoOutputFile
 
     document.body.getNodesByText('🚽 Presentation Error').forEach(
         el => {
             el.textContent = presentationError;
         }
-    );
+    ); // end replace PresentationError
 
     document.body.getNodesByText('🔥 Run-Time Error').forEach(
         el => {
             el.textContent = runTimeError;
         }
-    );
+    ); // end replace RunTimeError
 
     document.body.getNodesByText('💀 Security Violation').forEach(
         el => {
             el.textContent = securityViolation;
         }
-    );
+    ); // end replace SecurityViolation
 
     document.body.getNodesByText('⌛ Time Limit Exceeded').forEach(
         el => {
             el.textContent = timeLimit;
         }
-    );
+    ); // end replace TimeLimit
 
     document.body.getNodesByText('🗿 Wrong Answer').forEach(
         el => {
@@ -192,25 +218,25 @@ setInterval(function () {
             el.style.color = '#f00f'; // red
             el.style.width = 75;
         }
-    );
+    ); // end replace WrongAnswer
 
     document.body.getNodesByText('✨ Static Analysis Failed').forEach(
         el => {
             el.textContent = staticAnalysisFailed
         }
-    );
+    ); // end replace StaticAnalysisFailed
 
     document.body.getNodesByText('🔧 Dynamic Analysis Failed').forEach(
         el => {
             el.textContent = dynamicAnalysisFailed;
         }
-    );
+    ); // end replace DynamicAnalysisFailed
 
     document.body.getNodesByText('👀 Skipped').forEach(
         el => {
             el.textContent = skipped;
         }
-    );
+    ); // end replace Skipped
 
 	
-}, how_often);
+}, how_often); // end setInterval() for replace verdicts
