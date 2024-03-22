@@ -81,7 +81,7 @@ window.onload = function () {
     
     setTimeout(function () {
     	var adv = document.createElement("DIV");
-		adv.innerHTML = "Updated by Мартынов from t.me/baguette_boys".italics().bold();
+		adv.innerHTML = "Updated by Bogdan Martynov".italics().bold();
         // adv.style.backgroundColor = '#e3ff00';
         // adv.style.textAlign = 'center';
             
