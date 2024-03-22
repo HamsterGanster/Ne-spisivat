@@ -14,7 +14,7 @@
 let how_often = 100; // in ms, milliseconds
 
 // light in rating
-let yourName = 'Мартынов from baguette boys'; // точное имя из рейтинга
+let yourName = 'Мартынов from t.me/baguette_boys'; // точное имя из рейтинга
 let yourColor= '#A5ECFE'; // BackGroundColor 
 let yourDelay= 250; // Задержка перед подсветкой/убиранием таблицы попыток в миллисекундах. Если подсветки нет, увеличить время
 
