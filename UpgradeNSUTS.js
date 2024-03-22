@@ -55,7 +55,7 @@ skipped         = '👀 Skipped'; // обычное
 
 
 
-// function for searching text in HTML
+// function from Internet for searching text in HTML
 HTMLElement.prototype.getNodesByText = function (text) {
   const expr = `.//*[text()[contains(
     translate(.,
