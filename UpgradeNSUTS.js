@@ -35,22 +35,22 @@ window.onload = function () {
   }
 
 // your replace text:
-testing         = '🐝 Так, ну, подождите...';
-accepted        = '🏆 ASSEPTED';
-compileError    = '🚧 Compile Error'; // обычное
-deadlock        = '🥶 Deadlock - Timeout'; // обычное
-judgementFailed = '🤢 Judgement Failed'; // обычное
-juryError       = '🤮 Jury Error'; // обычное
-compiled        = '👍 Compiled (и че? 😐)';
-memoryLimit     = '🤯 Отдай память!';
-noOutputFile    = '🔍 Файл на выход?';
-presentationError='🚽 Ошибка в презентации';
-runTimeError    = '🔥 Алло, пожарные?';
-securityViolation='💀 Security Violation'; // обычное
-timeLimit       = '⌛️ Не тормози - сникерсни';
-wrongAnswer     = '                  🗿 Bruh                    '.bold();
-staticAnalysisFailed ='✨ Static Analysis Failed'; // обычное
-dynamicAnalysisFailed='🔧 Dynamic Analysis Failed'; // обычное
+testing               = '🐝 Так, ну, подождите...';
+accepted              = '🏆 ASSEPTED';
+compileError          = '🚧 Compile Error'; // обычное
+deadlock              = '🥶 Deadlock - Timeout'; // обычное
+judgementFailed       = '🤢 Judgement Failed'; // обычное
+juryError             = '🤮 Jury Error'; // обычное
+compiled              = '👍 Compiled (и че? 😐)';
+memoryLimit           = '🤯 Отдай память!';
+noOutputFile          = '🔍 Файл на выход?';
+presentationError     = '🚽 Ошибка в презентации';
+runTimeError          = '🔥 Алло, пожарные?';
+securityViolation     = '💀 Security Violation'; // обычное
+timeLimit             = '⌛️ Не тормози - сникерсни';
+wrongAnswer           = '                  🗿 Bruh                    '.bold();
+staticAnalysisFailed  = '✨ Static Analysis Failed'; // обычное
+dynamicAnalysisFailed = '🔧 Dynamic Analysis Failed'; // обычное
 skipped         = '👀 Skipped'; // обычное
 
 
