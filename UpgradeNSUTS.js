@@ -73,11 +73,12 @@ HTMLElement.prototype.getNodesByText = function (text) {
 window.onload = function () {  
 	// get yourName if autoSearch enabled
 	if (autoSearch == 1)
-    setTimeout(function() {
-      // There is only 1 block with the "dropdown" class on the site
-      // And it has your name
-      yourName = document.getElementsByClassName('dropdown')[0].childNodes[0].textContent;
-    }, getNameDelay);
+    	setTimeout(function() {
+    	  // There is only 1 block with the "dropdown" class on the site
+    	  // And it has your name
+    	  yourName = document.getElementsByClassName('dropdown')[0].childNodes[0].textContent;
+    	}, getNameDelay);
+    
     
     setTimeout(function () {
     	var adv = document.createElement("DIV");
@@ -105,7 +106,7 @@ window.onload = function () {
     // set fontSize = 30px for "выбрать компилятор", "выбрать задачу" and "выбрать файл" (very hard to click)
     if (doButtonsBigger == 1)
 	{
-		setTimeout(function () {
+		setInterval(function () {
 			if (document.getElementsByName('lang').length > 0)
 			{
 	 			document.getElementsByName('lang')[0].setAttribute('style', 'font-size: 30px');
@@ -172,13 +173,13 @@ setInterval(function () {
 	
 	// document.body.getNodesByText('🐝 Testing...').forEach(
  //       el => {
- //           el.textContent = Testing;
+ //           el.textContent = testing;
  //       }
  //   );
 	
 	document.body.getNodesByText('🏆 ACCEPTED').forEach(
         el => {
-            el.textContent = '🏆 ASSEPTED';
+            el.textContent = accepted;
             el.style.backgroundColor = '#0f02';
             el.style.textAlign = 'center';
         }
