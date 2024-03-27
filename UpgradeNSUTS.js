@@ -171,11 +171,11 @@ setInterval(function () {
 	// 	}
 	// );
 	
-	document.body.getNodesByText('Queued').forEach(
-        el => {
-            el.textContent = queue;
-        }
-    );
+	// document.body.getNodesByText('Queued').forEach(
+ //       el => {
+ //           el.textContent = queue;
+ //       }
+ //   );
   
 	// document.body.getNodesByText('🐝 Testing...').forEach(
  //       el => {
