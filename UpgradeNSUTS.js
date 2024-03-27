@@ -29,6 +29,7 @@ let getNameDelay = 500; // задержка в мс перед автомати�
 let doButtonsBigger = 1;
 
 // your replace text:
+queue                 = '🪴 Куеуе'
 testing               = '🐝 Так, ну, подождите...';
 accepted              = '🏆 ASSEPTED';
 compileError          = '🚧 Compile Error'; // обычное
@@ -45,7 +46,7 @@ timeLimit             = '⌛️ Не тормози - сникерсни';
 wrongAnswer           = '                  🗿 Bruh                    '.bold();
 staticAnalysisFailed  = '✨ Static Analysis Failed'; // обычное
 dynamicAnalysisFailed = '🔧 Dynamic Analysis Failed'; // обычное
-skipped         = '👀 Skipped'; // обычное
+skipped               = '👀 Skipped'; // обычное
 
 
 
@@ -170,7 +171,12 @@ setInterval(function () {
 	// 	}
 	// );
 	
-	
+	document.body.getNodesByText('🪴 Queued').forEach(
+        el => {
+            el.textContent = queue;
+        }
+    );
+  
 	// document.body.getNodesByText('🐝 Testing...').forEach(
  //       el => {
  //           el.textContent = testing;
