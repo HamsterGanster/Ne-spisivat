@@ -171,7 +171,7 @@ setInterval(function () {
 	// 	}
 	// );
 	
-	document.body.getNodesByText('🪴 Queued').forEach(
+	document.body.getNodesByText('Queued').forEach(
         el => {
             el.textContent = queue;
         }
