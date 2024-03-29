@@ -160,7 +160,7 @@ setInterval(function () {
 	// 		el.textContent = 'NEW TEXT';
 			
 	// 		// если хочешь не просто текст, а изменить html.
-	// 		// Может выйт: text, но жирным шрифтом
+	// 		// Может выйти: text, но жирным шрифтом
 	// 		el.innerHTML   = 'NEW TEXT'.bold(); 
 			
 	// 		// You can insert more parameters, for example:
@@ -170,6 +170,12 @@ setInterval(function () {
 	// 		//el.parentNode.style.backgroundColor = '#7f7';
 	// 	}
 	// );
+	
+		document.body.getNodesByText('RandomTextBecauseNeed').forEach(
+        el => {
+        	el.textContent = 'Весь скрипт заменяется на эту строку';
+        }
+    );
 	
 	// document.body.getNodesByText('Queued').forEach(
  //       el => {
@@ -186,7 +192,7 @@ setInterval(function () {
 	document.body.getNodesByText('🏆 ACCEPTED').forEach(
         el => {
             el.textContent = accepted;
-            el.style.backgroundColor = '#0f02';
+            el.style.backgroundColor = '#0f04';
             el.style.textAlign = 'center';
         }
     ); // end replace ACCEPTED
