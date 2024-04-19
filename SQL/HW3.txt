@@ -1,0 +1,115 @@
+-- TASK 1
+-- Get all the unique wares in the alphabetic order with the minimal and maximal prices for each.
+SELECT WARE, MIN(PRICE) AS MIN, MAX(PRICE) AS MAX
+FROM PRODUCT
+GROUP BY WARE
+ORDER BY WARE ASC;
+
+
+
+-- TASK 2
+-- Show top 3 wares with the most difference between minimal and maximal prices.
+ 
+SELECT WARE --, MAX(PRICE) AS MAX, MIN(PRICE) AS MIN, MAX(PRICE) - MIN(PRICE) AS ANSWER
+FROM PRODUCT
+GROUP BY WARE
+ORDER BY (MAX(PRICE) - MIN(PRICE)) DESC
+LIMIT 3;
+
+
+
+-- TASK 3
+-- Show top 3 companies producing the largest number of different products.
+SELECT COMPANY, COUNT(DISTINCT PRODUCT.WARE) AS TOP
+FROM MANUFACTURER
+INNER JOIN PRODUCT
+	ON MANUFACTURER.BILL_ID == PRODUCT.BILL_ID
+GROUP BY COMPANY
+ORDER BY TOP DESC
+LIMIT 3;
+
+
+
+-- TASK 4
+-- Show the price of the most expensive ware for each category. 
+-- The result should be ordered by the category.
+
+SELECT /*PRODUCT.WARE,*/ MAX(PRICE) AS 'MAX PRICE', CATEGORY.CLASS AS CATEGORY, GROUP_CONCAT(PRICE) AS 'DEBUG [GROUP_CONCAT(PRICE)]'
+FROM CATEGORY
+INNER JOIN PRODUCT
+	ON PRODUCT.WARE == CATEGORY.WARE
+GROUP BY CATEGORY.CLASS
+ORDER BY CATEGORY.CLASS;
+
+
+
+-- TASK 5
+-- For each bill of materials show the company and lists of all the products and materials. 
+-- The result must contain exactly one row per bill and sorted by company. 
+-- Lists in the result must be represented as strings with values separated with comma.
+
+-- I don't sure
+SELECT MANUFACTURER.BILL_ID, COMPANY, group_concat(DISTINCT PRODUCT.WARE), group_concat(DISTINCT MATERIAL.WARE)
+FROM MANUFACTURER
+INNER JOIN PRODUCT
+	ON PRODUCT.BILL_ID == MANUFACTURER.BILL_ID
+INNER JOIN MATERIAL
+	ON MATERIAL.BILL_ID == MANUFACTURER.BILL_ID
+GROUP BY MANUFACTURER.BILL_ID, COMPANY
+ORDER BY COMPANY ASC
+;
+
+-- DEBUG
+SELECT MANUFACTURER.BILL_ID, COMPANY, group_concat(PRODUCT.WARE), group_concat(MATERIAL.WARE)
+FROM MANUFACTURER
+INNER JOIN PRODUCT
+	ON PRODUCT.BILL_ID == MANUFACTURER.BILL_ID
+INNER JOIN MATERIAL
+	ON MATERIAL.BILL_ID == MANUFACTURER.BILL_ID
+GROUP BY MANUFACTURER.BILL_ID
+ORDER BY COMPANY
+;
+
+
+
+-- TASK 6
+-- Show the companies in the alphabetical order that producing larger number of different wares than consuming.
+SELECT MANUFACTURER.COMPANY, COUNT(DISTINCT PRODUCT.WARE) AS CNT_PROD, COUNT(DISTINCT MATERIAL.WARE) AS CNT_MAT
+FROM MANUFACTURER
+INNER JOIN PRODUCT
+	ON PRODUCT.BILL_ID == MANUFACTURER.BILL_ID
+INNER JOIN MATERIAL
+	ON MATERIAL.BILL_ID == MANUFACTURER.BILL_ID
+GROUP BY MANUFACTURER.COMPANY
+HAVING CNT_PROD > CNT_MAT
+-- HAVING COUNT(DISTINCT PRODUCT.WARE) CNT_PROD > COUNT(DISTINCT MATERIAL.WARE) CNT_MAT
+;
+
+-- -- DEBUG:
+-- SELECT *
+-- FROM MANUFACTURER
+-- INNER JOIN PRODUCT
+-- 	ON PRODUCT.BILL_ID == MANUFACTURER.BILL_ID
+-- INNER JOIN MATERIAL
+-- 	ON MATERIAL.BILL_ID == MANUFACTURER.BILL_ID
+-- ORDER BY COMPANY ASC;
+
+
+
+-- TASK 7
+-- Show all the companies that produce the same ware by more than 2 different ways (bills of materials).
+SELECT COMPANY , group_concat(prod.WARE)
+-- SELECT DISTINCT COMPANY
+FROM MANUFACTURER man
+INNER JOIN PRODUCT prod
+	ON prod.BILL_ID == man.BILL_ID
+GROUP BY COMPANY, prod.WARE
+HAVING COUNT(prod.WARE) > 2
+
+
+
+-- TASK 8
+-- Get all the unique companies producing at least one ware from each category in the set: Fuel, Food and Mineral.
+-- The query should be easily modifiable to use any set of categories.
+SELECT COMPANY
+FROM MANUFACTURER
