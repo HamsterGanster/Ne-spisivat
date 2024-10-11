@@ -1,12 +1,84 @@
-гиперонимия (транспорт гипероним машины, млекопитающее гиперонима ежа)
+Код:
+hall_wet.
+bathroom_dry.
+window_closed.
+leak_in_bathroom :-
+    hall_wet,
+    kitchen_dry.
+problem_in_kitchen :- 
+    hall_wet,
+    bathroom_dry.
+no_water_from_outside :-
+    no_rain;
+    window_closed.
+leak_kitchen :-
+    problem_in_kitchen,
+    no_water_from_outside. 
 
-минероминия (part и member)
-  member: член команды (больше к живому)
-  part: колесо — часть машины
 
-Будет:
-  w1/PoS1/Sen1 и w2/PoS2/Sen2
-  _   ?    ?     _   ?    ?
-Как связаны w1 и w2? 
-Составляем цепочку семантических связей: 
-  w1 - ... - w11  и  w11 - ... - w2
+Можно сделать предикаты динамическими:
+:- dynamic predicate/arity % название/арность, почти "кол-во аргументов"
+
+asserta(predicate(args)) — добавляет что-то сверху (видимо в начала доказательств)
+assertz(predicate(args)) — добавляет в конец
+retract(predicate(args)) — удаляет одно вхождение предиката.
+listing(predicate/arity) — выводит всю информацию о предикате.
+retractall(predicate(args)) — удаляет информацию о предикате.
+
+Пример:
+:- dynamic p/1
+?- p(1).
+false.
+?- assertz(p(1)).
+true.
+?- p(1).
+true.
+?- assertz(p(1)).
+true.
+?- assertz(p(1)).
+true.
+?- p(1).
+true;
+true;
+true.
+?- restractall(f(_)). % _ подставит любой аргумент и удалит вообще всё.
+
+
+
+
+Но хочется "if hall_wet and bathroom_dry ..."
+Для этого зададим синтаксис:
+
+true(Hyp) :- known(Hyp).
+true(Hyp1 and Hyp2) :- true(Hyp1) and true(Hyp2).
+true(Hyp1 or  Hyp2) :- true(Hyp1) or  true(Hyp2).
+true(Hyp) :- сущ P if P then Hyp AND true(P).
+
+:- op(800, fx, if).
+:- op(700, xfx, then).
+:- op(300, xfy, or).
+:- op(200, xfy, and).
+
+if 
+    hall_wet and kitchen_dry
+then 
+    leak_in_bathroom.
+
+if 
+    hall_wet and bathroom_dry
+then 
+    leak_kitchen.
+
+if 
+    window_closed or no_rain
+then  
+    no_water_from_outside.
+
+
+
+
+
+
+IF THEN ELSE на Prolog
+G1 -> G2; G3
+Докажи G1 и, если смог, докажи G2. Иначе докажи G3.
