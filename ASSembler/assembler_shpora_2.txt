@@ -32,7 +32,7 @@ le		(Z or N & !V) or (!N & V)	less than or equal (знаковое <=)
 # ===
 # if, while, do-until
 
-фото с условиями для is, stays и until (либо список в начале файла): https://disk.yandex.ru/i/4W4sBW3ArUntVw
+фото с условиями для is, stays и until (либо список в начале файла): if_IS_else.png в этой же папке.
 
 структура:
 if
