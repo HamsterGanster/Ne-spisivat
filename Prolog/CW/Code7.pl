@@ -33,6 +33,7 @@
  *     proof tree is either PT1 or PT2.
  */
 
+
 :- dynamic derived/1.
 :- dynamic asked/1.
 
@@ -42,8 +43,7 @@
 :- op(300, xfy, or).
 :- op(200, xfy, and).
 
-:- retractall(derived(_)).
-:- retractall(asked(_)).
+:- retractall(derived(_)), retractall(asked(_)).
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -85,70 +85,55 @@ askable(no_rain).
 
 
 true(Statement, Proof) :- 
-                            retractall(derived(_)),
-                            retractall(asked(_)),
-                            true(Statement, Proof, []).
+    retractall(derived(_)),
+    retractall(asked(_)),
+    true(Statement, Proof, []).
 
-true(Hyp, Hyp, _) :-
-    derived(Hyp).
+true(Statement, Statement, _) :- derived(Statement).
 
 true(S1 and S2, P1 and P2, Trace) :-
     true(S1, P1, Trace),
     true(S2, P2, Trace).
 
 true(S1 or S2, P, Trace) :-
-    true(S1, P, Trace);
+    true(S1, P, Trace) ;
     true(S2, P, Trace).
 
-% Существует дерево вывода ConditionProof, значит Conclusion тоже доказывается 
-% Добавим '<==' в Trace и в дерево
 true(Conclusion, Conclusion <== ConditionProof, Trace) :-
     if Condition then Conclusion,
     true(Condition, ConditionProof, [if Condition then Conclusion | Trace]).
 
-
-% ask user about statement
-true(Statement, Proof, Trace) :- 
+true(Statement, Proof, Trace) :-
     askable(Statement),
-    not(derived(Statement)),
-    not(asked(Statement)),
+    \+ derived(Statement),
+    \+ asked(Statement),
     ask(Statement, Proof, Trace).
 
-
-% Asking user to provide 
-
 ask(Statement, Proof, Trace) :-
-    % format("Pravda chto ~w dokazivaetca ~w po pravilam ~w: ", [Statement, Proof, Trace]),
-    format("Is it true that ~w? Please answer 'yes', 'no' or 'why': ", [Statement]),
+    format('\nIs it true that ~w ? Please answer \'yes\', \'no\' or \'why\'.\n',[Statement]),
     read_string(user_input, "\n", "\r\t", _, Answer),
     process(Answer, Statement, Proof, Trace).
 
 
-% Processing user answer
-
 process("yes", S, S <== was_told, _) :- 
-    !, 
+    !,
     asserta(derived(S)),
     asserta(asked(S)).
-
-process("no", S, _, _) :-
-    !, 
-    % retractall(derived(S)),
+process("no", S, _, _) :-   
+    !,
     asserta(asked(S)),
     fail.
-
-process("why", Statement, Proof, Trace) :- 
-    !, 
-    show_reasoning_chain(Trace),
+process("why", Statement, Proof, Trace) :-  
+    !,
+    show_reasoning_chain(Trace), nl,
     ask(Statement, Proof, Trace).
+process(_, Statement, Proof, Trace) :-
+    write('Please answer \'yes\', \'no\' or \'why\'!\n'),
+    read_string(user_input, "\n", "\r\t", _, Answer),
+    process(Answer, Statement, Proof, Trace).
 
-% process incorrect answers
-process(_, Statement, Proof, Trace) :- 
-    format("I don't understand. Reinput please.\n"),
-    ask(Statement, Proof, Trace).
 
-% Answer the "Why"-question
 show_reasoning_chain([]).
 show_reasoning_chain([if Cond then Concl | Rules]) :-
-    format("\n   To infer ~w, using rule\n\t   (if ~w then ~w)\n", [Concl, Cond, Concl]),
+    format('\n   To infer ~w, using rule\n\t   (if ~w then ~w)', [Concl, Cond, Concl]),
     show_reasoning_chain(Rules).
