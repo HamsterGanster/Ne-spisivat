@@ -44,9 +44,9 @@ runTimeError          = '🔥 Алло, пожарные?';
 securityViolation     = '💀 Security Violation'; // обычное
 timeLimit             = '⌛️ Не тормози - сникерсни';
 wrongAnswer           = '                  🗿 Bruh                    '.bold();
-staticAnalysisFailed  = '✨ Static Analysis Failed'; // обычное
-dynamicAnalysisFailed = '🔧 Dynamic Analysis Failed'; // обычное
-skipped               = '👀 Skipped'; // обычное
+//staticAnalysisFailed  = '✨ Static Analysis Failed'; // обычное
+//dynamicAnalysisFailed = '🔧 Dynamic Analysis Failed'; // обычное
+//skipped               = '👀 Skipped'; // обычное
 
 
 
@@ -272,23 +272,23 @@ setInterval(function () {
         }
     ); // end replace WrongAnswer
 
-    document.body.getNodesByText('✨ Static Analysis Failed').forEach(
-        el => {
-            el.textContent = staticAnalysisFailed
-        }
-    ); // end replace StaticAnalysisFailed
+    // document.body.getNodesByText('✨ Static Analysis Failed').forEach(
+    //     el => {
+    //         el.textContent = staticAnalysisFailed
+    //     }
+    // ); // end replace StaticAnalysisFailed
 
-    document.body.getNodesByText('🔧 Dynamic Analysis Failed').forEach(
-        el => {
-            el.textContent = dynamicAnalysisFailed;
-        }
-    ); // end replace DynamicAnalysisFailed
+    // document.body.getNodesByText('🔧 Dynamic Analysis Failed').forEach(
+    //     el => {
+    //         el.textContent = dynamicAnalysisFailed;
+    //     }
+    // ); // end replace DynamicAnalysisFailed
 
-    document.body.getNodesByText('👀 Skipped').forEach(
-        el => {
-            el.textContent = skipped;
-        }
-    ); // end replace Skipped
+    // document.body.getNodesByText('👀 Skipped').forEach(
+    //     el => {
+    //         el.textContent = skipped;
+    //     }
+    // ); // end replace Skipped
 
 	
 }, how_often); // end setInterval() for replace verdicts
